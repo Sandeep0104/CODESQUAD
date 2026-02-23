@@ -44,7 +44,17 @@ def create_visualizations():
             plt.close()
             print("Successfully saved hr_trend.png")
         
-        
+        # Plot 2: Oxygen distribution (Histogram) across all patients
+        if not vitals_df.empty:
+             plt.figure(figsize=(8, 6))
+             sns.histplot(vitals_df['ox'], bins=20, kde=True, color='skyblue')
+             plt.title('Distribution of Oxygen Levels Across All Patients')
+             plt.xlabel('Oxygen Level (%)')
+             plt.ylabel('Frequency')
+             plt.tight_layout()
+             plt.savefig('project/visualizations/oxygen_distribution.png')
+             plt.close()
+             print("Successfully saved oxygen_distribution.png")
 
     except Exception as e:
         print(f"Error creating visualizations: {e}")
