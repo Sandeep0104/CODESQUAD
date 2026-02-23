@@ -110,12 +110,15 @@ Notes:
 
 
 ## Contributions
-Fill in the team member names and their contributions. Example entries are provided — please replace or expand as needed.
 
-- **Sandeep (Sandy)**: Implemented pipeline orchestration (`main.py`), and the visualization scripts; integrated GUI and project structure; pushed changes to the git remote.
-)
+Prateek – Handled data extraction, cleaning, standardization, and normalization (Bronze & Silver layers).
+Harshit – Supported preprocessing, schema standardization, and numeric validation of datasets.
+Mansi – Implemented the Gold layer, patient master table, anomaly detection, and summary generation.
+Prakriti – Created visualizations and analytical dashboards for health trends and anomalies.
+Sandeep – Managed end-to-end project integration, Git version control, and GUI dashboard development.
 
 
 ## License
 This repository does not include a license file. Add one if you plan to share this repository publicly.
+
 
