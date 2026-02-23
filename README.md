@@ -112,11 +112,10 @@ Notes:
 ## Contributions
 Fill in the team member names and their contributions. Example entries are provided — please replace or expand as needed.
 
-- **Ajay Kumar**: Provided lab documents (labs- Ajay kumar.docx) and sample vitals/EHR files; helped define expected input formats.
-- **Sandeep (Sandy)**: Implemented pipeline orchestration (`main.py`), `src/gold_layer.py` anomaly detection, and the visualization scripts; integrated GUI and project structure; pushed changes to the git remote.
-- **Member Name**: Role/Contributions (replace with actual member and details)
+- **Sandeep (Sandy)**: Implemented pipeline orchestration (`main.py`), and the visualization scripts; integrated GUI and project structure; pushed changes to the git remote.
+)
 
-If you'd like, tell me the exact list of team members and what each did and I will update this section for you.
 
 ## License
 This repository does not include a license file. Add one if you plan to share this repository publicly.
+
