@@ -3,14 +3,10 @@ import pandas as pd
 import json
 
 def clean_ehr(input_path, output_path):
-    # EHR does not need much cleaning for now, just pass it through
-    # but we can save it to silver for completeness if we wanted.
-    # The instructions don't strictly require saving ehr to silver, 
-    # but we will just to be safe.
     pass
 
 def clean_vitals(input_path, output_path):
-    print("Cleaning vitals...")
+    print("Cleaning vitals file")
     try:
         # Read JSON lines
         data = []
@@ -24,8 +20,6 @@ def clean_vitals(input_path, output_path):
         df.rename(columns={'patientId': 'patient_id'}, inplace=True)
         
         # Convert timestamp to datetime
-        # Assuming timestamp is in seconds based on typical UNIX timestamp 
-        # (e.g., 1730001290)
         df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
         
         # Ensure numeric fields
@@ -48,7 +42,6 @@ def clean_labs(input_path, output_path):
         df = pd.DataFrame(data)
         
         # Standardize columns (patient_id, timestamp, lab_test, lab_value)
-        # Assuming raw has {"patientId": 101, "test": "ALT", "value": 19.5, "timestamp": "2024-01-10 12:00:00"}
         df.rename(columns={'patientId': 'patient_id', 'test': 'lab_test', 'value': 'lab_value'}, inplace=True)
         
         # Convert timestamp to datetime
