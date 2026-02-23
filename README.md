@@ -111,7 +111,7 @@ Notes:
 
 ## Contributions
 
-Prateek – Handled data extraction, cleaning, standardization, and normalization (Bronze & Silver layers).
+Prateek – Handled data extraction, cleaning, standardization, and normalization (Bronze & Silver layers).<br>
 Harshit – Supported preprocessing, schema standardization, and numeric validation of datasets.
 Mansi – Implemented the Gold layer, patient master table, anomaly detection, and summary generation.
 Prakriti – Created visualizations and analytical dashboards for health trends and anomalies.
@@ -120,5 +120,6 @@ Sandeep – Managed end-to-end project integration, Git version control, and GUI
 
 ## License
 This repository does not include a license file. Add one if you plan to share this repository publicly.
+
 
 
