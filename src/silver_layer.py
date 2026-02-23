@@ -3,10 +3,14 @@ import pandas as pd
 import json
 
 def clean_ehr(input_path, output_path):
+    # EHR does not need much cleaning for now, just pass it through
+    # but we can save it to silver for completeness if we wanted.
+    # The instructions don't strictly require saving ehr to silver, 
+    # but we will just to be safe.
     pass
 
 def clean_vitals(input_path, output_path):
-    print("Cleaning vitals file")
+    print("Cleaning vitals...")
     try:
         # Read JSON lines
         data = []
@@ -20,6 +24,8 @@ def clean_vitals(input_path, output_path):
         df.rename(columns={'patientId': 'patient_id'}, inplace=True)
         
         # Convert timestamp to datetime
+        # Assuming timestamp is in seconds based on typical UNIX timestamp 
+        # (e.g., 1730001290)
         df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
         
         # Ensure numeric fields
@@ -33,3 +39,32 @@ def clean_vitals(input_path, output_path):
     except Exception as e:
         print(f"Error cleaning vitals: {e}")
 
+def clean_labs(input_path, output_path):
+    print("Cleaning labs...")
+    try:
+        with open(input_path, 'r') as f:
+            data = json.load(f)
+            
+        df = pd.DataFrame(data)
+        
+        # Standardize columns (patient_id, timestamp, lab_test, lab_value)
+        # Assuming raw has {"patientId": 101, "test": "ALT", "value": 19.5, "timestamp": "2024-01-10 12:00:00"}
+        df.rename(columns={'patientId': 'patient_id', 'test': 'lab_test', 'value': 'lab_value'}, inplace=True)
+        
+        # Convert timestamp to datetime
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        
+        # Ensure numeric fields
+        df['lab_value'] = pd.to_numeric(df['lab_value'], errors='coerce')
+        
+        df.to_csv(output_path, index=False)
+        print(f"Saved cleaned labs to {output_path}")
+
+    except Exception as e:
+        print(f"Error cleaning labs: {e}")
+        
+
+if __name__ == "__main__":
+    os.makedirs('project/silver', exist_ok=True)
+    clean_vitals('project/bronze/vitals.jsonl', 'project/silver/clean_vitals.csv')
+    clean_labs('project/bronze/labs.json', 'project/silver/clean_labs.csv')
