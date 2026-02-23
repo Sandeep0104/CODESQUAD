@@ -23,11 +23,10 @@ def extract_labs(input_path, output_path):
              if text:
                  json_content += text
         
-        # Validating it's parsable JSON
         parsed_json = json.loads(json_content)
         with open(output_path, 'w') as f:
             json.dump(parsed_json, f, indent=2)
         print("Successfully extracted labs data.")
-
+        
     except Exception as e:
         print(f"Error extracting labs data: {e}")
