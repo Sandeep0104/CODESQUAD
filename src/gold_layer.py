@@ -30,10 +30,19 @@ def process_anomalies(vitals_df):
 def create_gold_layer():
     print("Creating Gold Layer...")
     try:
-        # Load Silver Data
-        vitals_df = pd.read_csv('project/silver/clean_vitals.csv')
-        labs_df = pd.read_csv('project/silver/clean_labs.csv')
-        ehr_df = pd.read_csv('project/bronze/ehr.csv') # EHR is passed through Bronze
+        # Load Silver Data (use top-level folders)
+        vitals_path = 'silver/clean_vitals.csv'
+        labs_path = 'silver/clean_labs.csv'
+        ehr_path = 'bronze/ehr.csv' # EHR is passed through Bronze
+
+        if not os.path.exists(vitals_path):
+            raise FileNotFoundError(f"Missing vitals file: {vitals_path}")
+        if not os.path.exists(labs_path):
+            print(f"Warning: labs file not found at {labs_path} — continuing without labs.")
+
+        vitals_df = pd.read_csv(vitals_path)
+        labs_df = pd.read_csv(labs_path) if os.path.exists(labs_path) else pd.DataFrame()
+        ehr_df = pd.read_csv(ehr_path) if os.path.exists(ehr_path) else pd.DataFrame()
         
         # Merge Vitals with EHR
         # We can do an outer join or left join depending on requirements. 
@@ -49,12 +58,12 @@ def create_gold_layer():
         else:
             summary_df = pd.DataFrame(columns=['patient_id', 'anomaly_type', 'anomaly_count'])
         
-        os.makedirs('project/gold', exist_ok=True)
-        
+        os.makedirs('gold', exist_ok=True)
+
         # Save merged and anomaly results
-        merged_vitals.to_csv('project/gold/merged_vitals.csv', index=False)
-        anomalies_df.to_csv('project/gold/anomalies_log.csv', index=False)
-        summary_df.to_csv('project/gold/anomaly_summary.csv', index=False)
+        merged_vitals.to_csv('gold/merged_vitals.csv', index=False)
+        anomalies_df.to_csv('gold/anomalies_log.csv', index=False)
+        summary_df.to_csv('gold/anomaly_summary.csv', index=False)
         
         print("Successfully created Gold Layer.")
     except Exception as e:

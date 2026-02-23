@@ -58,6 +58,6 @@ def clean_labs(input_path, output_path):
         
 
 if __name__ == "__main__":
-    os.makedirs('project/silver', exist_ok=True)
-    clean_vitals('project/bronze/vitals.jsonl', 'project/silver/clean_vitals.csv')
-    clean_labs('project/bronze/labs.json', 'project/silver/clean_labs.csv')
+    os.makedirs('silver', exist_ok=True)
+    clean_vitals('bronze/vitals.jsonl', 'silver/clean_vitals.csv')
+    clean_labs('bronze/labs.json', 'silver/clean_labs.csv')
